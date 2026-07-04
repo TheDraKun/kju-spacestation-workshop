@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 10f;
 
+    [SerializeField] private Animator playerAnimator;
     private CharacterController controller;
     private Vector2 moveInput;
 
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         ReadInput();
         Move();
         Rotate();
+        UpdateAnimation();
     }
 
     private void ReadInput()
@@ -62,5 +64,11 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation,
             targetRotation,
             rotationSpeed * Time.deltaTime);
+    }
+
+    private void UpdateAnimation()
+    {
+        bool isRunning = moveInput.sqrMagnitude > 0f;
+        playerAnimator.SetBool("Run", isRunning);
     }
 }
