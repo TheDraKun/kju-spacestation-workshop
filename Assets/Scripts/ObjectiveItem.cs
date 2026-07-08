@@ -1,12 +1,21 @@
 using UnityEngine;
 
+[System.Serializable]
 public enum ObjectiveItemType
 {
-    EnergyCore
+    None = 0,
+    EnergyCore = 1,
+    MedPack = 2,
+    DataChip = 3
 }
 
 public class ObjectiveItem : MonoBehaviour
 {
+    [SerializeField]
+    private ObjectiveItemType itemType;
+
+    public ObjectiveItemType ItemType => itemType;
+
     public void AttachTo(Transform parent)
     {
         transform.SetParent(parent);

@@ -5,7 +5,7 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int requiredItems = 3;
     [SerializeField] private DepositStation depositStation;
     [SerializeField] private ActivationConsole activationConsole;
-    [SerializeField] private ProgressDoor progressDoor;
+    [SerializeField] private ProgressDoor[] progressDoors;
     [SerializeField] private ObjectiveItemSpawner itemSpawner;
 
     private bool roomCompleted;
@@ -37,7 +37,10 @@ public class RoomManager : MonoBehaviour
     {
         roomCompleted = true;
 
-        progressDoor.Open();
+        foreach (var door in progressDoors)
+        {
+            door.Open();
+        }
 
         Debug.Log($"{gameObject.name} Completed!");
     }

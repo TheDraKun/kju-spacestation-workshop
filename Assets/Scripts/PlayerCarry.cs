@@ -2,13 +2,12 @@ using UnityEngine;
 
 public class PlayerCarry : MonoBehaviour
 {
-    [SerializeField]
-    private ObjectiveItemType itemType;
     [SerializeField] private Transform carryPoint;
 
     private ObjectiveItem carriedItem;
 
     public bool HasItem => carriedItem != null;
+    public ObjectiveItem CarriedItem => carriedItem;
 
     private void OnTriggerEnter(Collider other)
     {

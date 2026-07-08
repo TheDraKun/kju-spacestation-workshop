@@ -4,6 +4,7 @@ using UnityEngine;
 public class DepositStation : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private ObjectiveItemType requiredItemType;
     [SerializeField] private int requiredItems = 3;
 
     [Header("Debug")]
@@ -40,6 +41,9 @@ public class DepositStation : MonoBehaviour
         if (!playerCarry.HasItem)
             return;
 
+        if (playerCarry.CarriedItem.ItemType != requiredItemType)
+            return;
+
         Deposit(playerCarry.DepositItem());
     }
 
@@ -47,6 +51,12 @@ public class DepositStation : MonoBehaviour
     {
         if (currentItems >= requiredItems)
             return;
+
+        if (currentItems >= depositSockets.Count)
+        {
+            Debug.LogError("Not enough deposit sockets configured.");
+            return;
+        }
 
         Debug.Log($"Deposited Item: {item.name}");
 
