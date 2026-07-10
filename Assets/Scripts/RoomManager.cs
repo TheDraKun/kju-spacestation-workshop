@@ -11,6 +11,8 @@ public class RoomManager : MonoBehaviour
 
     private bool roomCompleted;
     public bool IsCompleted => roomCompleted;
+    public int RequiredItems => requiredItems;
+    public int CurrentItems => depositStation.CurrentItems;
     private void Start()
     {
         depositStation.Initialize(requiredItems);
@@ -44,6 +46,7 @@ public class RoomManager : MonoBehaviour
             door.Open();
         }
 
+        OnRoomCompleted();
         Debug.Log($"{gameObject.name} Completed!");
     }
 
@@ -53,5 +56,10 @@ public class RoomManager : MonoBehaviour
         activationConsole.ResetConsole();
         itemSpawner.SpawnItems();
         roomCompleted = false;
+    }
+
+    private void OnRoomCompleted()
+    {
+        GameManager.Instance.OnRoomCompleted(this);
     }
 }

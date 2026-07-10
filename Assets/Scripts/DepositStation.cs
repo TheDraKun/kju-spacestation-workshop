@@ -63,7 +63,7 @@ public class DepositStation : MonoBehaviour
         item.AttachTo(depositSockets[currentItems]);
 
         currentItems++;
-
+        GameManager.Instance.UpdateRoomProgress(item.ItemType);
         Debug.Log($"Deposit Progress : {currentItems}/{requiredItems}");
 
         if (IsComplete)

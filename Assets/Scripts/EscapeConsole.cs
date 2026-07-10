@@ -55,6 +55,7 @@ public class EscapeConsole : MonoBehaviour
         SetActivatedStatus();
 
         escapePod.Arrive();
+        GameManager.Instance.OnEscapeActivated();
 
         Debug.Log("Escape Sequence Initiated!");
     }

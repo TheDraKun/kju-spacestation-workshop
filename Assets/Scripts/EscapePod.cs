@@ -26,6 +26,7 @@ public class EscapePod : MonoBehaviour
     public void Depart()
     {
         MoveTo(hiddenPosition);
+        GameManager.Instance.CompleteGame();
     }
 
     private void MoveTo(Vector3 targetPosition)
@@ -76,9 +77,6 @@ public class EscapePod : MonoBehaviour
             Depart();
 
             Debug.Log("Player Entered Escape Pod!");
-
-            // TODO:
-            // GameManager.Instance.CompleteGame();
         }
     }
 }
