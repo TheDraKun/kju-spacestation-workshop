@@ -9,6 +9,7 @@ public class ActivationConsole : MonoBehaviour
     [SerializeField] private Material inactiveMaterial;
     [SerializeField] private Material readyMaterial;
     [SerializeField] private Material activeMaterial;
+    [SerializeField] private AudioSource activationSound;
 
     private bool isReady;
     private bool isActivated;
@@ -37,6 +38,7 @@ public class ActivationConsole : MonoBehaviour
     private void Activate()
     {
         isActivated = true;
+        activationSound.Play();
         Debug.Log("Console Activated!");
         SetStatus(true);
     }

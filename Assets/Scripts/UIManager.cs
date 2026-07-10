@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject popupPanel;
     [SerializeField] private TMP_Text popupTitleText;
     [SerializeField] private TMP_Text popupMessageText;
+    [SerializeField] private AudioSource popupSound;
 
     [Header("Stage Completion Popup")]
     [SerializeField] private GameObject stageCompletionPanel;
@@ -156,6 +157,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowPopup(string title, string message)
     {
+        popupSound.Play();
         popupPanel.SetActive(true);
 
         popupTitleText.text = title;

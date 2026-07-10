@@ -10,6 +10,7 @@ public class EscapeConsole : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private EscapePod escapePod;
+    [SerializeField] private AudioSource activationSound;
 
     private bool isReady;
     private bool isActivated;
@@ -45,11 +46,14 @@ public class EscapeConsole : MonoBehaviour
         if (!other.TryGetComponent<PlayerCarry>(out _))
             return;
 
+        activationSound.Play();
         Activate();
     }
 
     private void Activate()
     {
+        activationSound.Play();
+
         isActivated = true;
 
         SetActivatedStatus();

@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
 
         uiManager.UpdateReactorProgress(0, reactorRoom.RequiredItems);
         uiManager.UpdateMedbayProgress(0, medbayRoom.RequiredItems);
+
+        uiManager.ShowPopup(
+            "MISSION START",
+            "Restore the Reactor and Medbay to Unlock the Control Room");
     }
 
     private bool AreInitialRoomsCompleted()

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerCarry : MonoBehaviour
 {
     [SerializeField] private Transform carryPoint;
+    [SerializeField] private AudioSource pickupSound;
 
     private ObjectiveItem carriedItem;
 
@@ -16,6 +17,7 @@ public class PlayerCarry : MonoBehaviour
 
         if (other.TryGetComponent(out ObjectiveItem item))
         {
+            pickupSound.Play();
             item.AttachTo(carryPoint);
             carriedItem = item;
         }

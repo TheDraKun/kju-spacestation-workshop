@@ -6,6 +6,7 @@ public class DepositStation : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private ObjectiveItemType requiredItemType;
     [SerializeField] private int requiredItems = 3;
+    [SerializeField] private AudioSource depositSound;
 
     [Header("Debug")]
     [SerializeField] private int currentItems;
@@ -59,6 +60,7 @@ public class DepositStation : MonoBehaviour
         }
 
         Debug.Log($"Deposited Item: {item.name}");
+        depositSound.Play();
 
         item.AttachTo(depositSockets[currentItems]);
 
