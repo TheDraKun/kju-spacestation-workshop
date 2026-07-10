@@ -60,4 +60,11 @@ public class ActivationConsole : MonoBehaviour
             renderer.material = readyMaterial;
         }
     }
+
+    public void ResetConsole()
+    {
+        isActivated = false;
+        isReady = false;
+        SetStatus(false);
+    }
 }

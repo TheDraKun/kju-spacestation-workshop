@@ -88,4 +88,10 @@ public class DepositStation : MonoBehaviour
                 : inactiveMaterial;
         }
     }
+
+    public void ResetStation()
+    {
+        currentItems = 0;
+        SetStatus(false);
+    }
 }

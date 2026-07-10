@@ -5,10 +5,12 @@ public class RoomManager : MonoBehaviour
     [SerializeField] private int requiredItems = 3;
     [SerializeField] private DepositStation depositStation;
     [SerializeField] private ActivationConsole activationConsole;
+
     [SerializeField] private ProgressDoor[] progressDoors;
     [SerializeField] private ObjectiveItemSpawner itemSpawner;
 
     private bool roomCompleted;
+    public bool IsCompleted => roomCompleted;
     private void Start()
     {
         depositStation.Initialize(requiredItems);
@@ -43,5 +45,13 @@ public class RoomManager : MonoBehaviour
         }
 
         Debug.Log($"{gameObject.name} Completed!");
+    }
+
+    public void InitializeRoom()
+    {
+        depositStation.ResetStation();
+        activationConsole.ResetConsole();
+        itemSpawner.SpawnItems();
+        roomCompleted = false;
     }
 }

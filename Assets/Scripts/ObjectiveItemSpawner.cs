@@ -15,11 +15,6 @@ public class ObjectiveItemSpawner : MonoBehaviour
         CacheSpawnPoints();
     }
 
-    private void Start()
-    {
-        SpawnObjectiveItems();
-    }
-
     private void CacheSpawnPoints()
     {
         spawnPoints.Clear();
@@ -70,8 +65,13 @@ public class ObjectiveItemSpawner : MonoBehaviour
         }
     }
 
-    internal void SetSpawnCount(int requiredItems)
+    public void SetSpawnCount(int requiredItems)
     {
         spawnCount = requiredItems;
+    }
+
+    public void SpawnItems()
+    {
+        SpawnObjectiveItems();
     }
 }
