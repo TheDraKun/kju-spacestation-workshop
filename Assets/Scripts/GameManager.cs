@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
 
     private bool controlRoomUnlocked;
-    private bool escapeConsoleEnabled;
-
     private RoomManager reactorRoom => initialRooms[0];
     private RoomManager medbayRoom => initialRooms[1];
 
@@ -42,14 +40,14 @@ public class GameManager : MonoBehaviour
     }
     private void InitializeUI()
     {
-        uiManager.ShowReactor();
-        uiManager.ShowMedbay();
+        uiManager.ShowReactorObjective();
+        uiManager.ShowMedbayObjective();
 
-        uiManager.HideControlRoom();
+        uiManager.HideControlRoomObjective();
         uiManager.HideEscape();
 
-        uiManager.SetReactorActive();
-        uiManager.SetMedbayActive();
+        uiManager.SetReactorObjectiveActive();
+        uiManager.SetMedbayObjectiveActive();
 
         uiManager.UpdateReactorProgress(0, reactorRoom.RequiredItems);
         uiManager.UpdateMedbayProgress(0, medbayRoom.RequiredItems);
@@ -75,11 +73,11 @@ public class GameManager : MonoBehaviour
         escapeConsole.SetReady();
 
         uiManager.ShowEscape();
-        uiManager.SetEscapeActive();
+        uiManager.SetEscapeObjectiveActive();
 
     }
 
-    internal void CompleteGame()
+    internal void ShowGameCompleteScreen()
     {
         Invoke(nameof(InvokeCompleteGame), 2f);
     }
@@ -111,7 +109,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnEscapeActivated()
     {
-        uiManager.SetEscapeComplete();
+        uiManager.SetEscapeObjectiveComplete();
 
         uiManager.ShowPopup(
             "ESCAPE INITIATED",
@@ -126,8 +124,8 @@ public class GameManager : MonoBehaviour
 
             finalRoom.InitializeRoom();
 
-            uiManager.ShowControlRoom();
-            uiManager.SetControlRoomActive();
+            uiManager.ShowControlRoomObjective();
+            uiManager.SetControlRoomObjectiveActive();
             uiManager.UpdateControlRoomProgress(0, finalRoom.RequiredItems);
         }
 
@@ -136,19 +134,19 @@ public class GameManager : MonoBehaviour
             uiManager.ShowPopup(
             "REACTOR RESTORED",
             "Power Systems Online");
-            uiManager.SetReactorComplete();
+            uiManager.SetReactorObjectiveComplete();
         }
         else if (roomManager == medbayRoom)
         {
             uiManager.ShowPopup(
                 "MEDBAY RESTORED",
                 "Medical Systems Online");
-            uiManager.SetMedbayComplete();
+            uiManager.SetMedbayObjectiveComplete();
         }
         else if (roomManager == finalRoom)
         {
             UnlockEscapeConsole();
-            uiManager.SetControlRoomComplete();
+            uiManager.SetControlRoomObjectiveComplete();
 
             uiManager.ShowPopup(
                 "CONTROL ROOM RESTORED",

@@ -8,7 +8,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float rotationSpeed = 10f;
 
+    [Header("References")]
     [SerializeField] private Animator playerAnimator;
+
     private CharacterController controller;
     private Vector2 moveInput;
 
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
+    // Read player input, then update movement every frame.
     private void Update()
     {
         ReadInput();

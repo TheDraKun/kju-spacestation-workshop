@@ -4,8 +4,20 @@ public class ProgressDoor : MonoBehaviour
 {
     [SerializeField] private Collider doorCollider;
 
+    [Header("Animation")]
+    [SerializeField] private float openDistance = 3f;
+    [SerializeField] private float openDuration = 1f;
+
+    private Vector3 closedPosition;
+    private Coroutine animationRoutine;
+
     private bool isOpen;
     public bool IsOpen => isOpen;
+
+    private void Awake()
+    {
+        closedPosition = doorCollider.transform.localPosition;
+    }
 
     public void Open()
     {
@@ -16,18 +28,8 @@ public class ProgressDoor : MonoBehaviour
 
         doorCollider.enabled = false;
 
+        doorCollider.transform.localPosition = closedPosition + Vector3.right * openDistance;
+
         Debug.Log("Door Opened!");
-    }
-
-    public void Close()
-    {
-        if (!isOpen)
-            return;
-
-        isOpen = false;
-
-        doorCollider.enabled = true;
-
-        Debug.Log("Door Closed!");
     }
 }

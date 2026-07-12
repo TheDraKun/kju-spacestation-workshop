@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class PlayerCarry : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Transform carryPoint;
+
+    [Header("Audio")]
     [SerializeField] private AudioSource pickupSound;
 
     private ObjectiveItem carriedItem;
@@ -12,6 +15,7 @@ public class PlayerCarry : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // The player can only carry one item at a time.
         if (HasItem)
             return;
 
@@ -29,7 +33,7 @@ public class PlayerCarry : MonoBehaviour
             return null;
 
         ObjectiveItem itemToDeposit = carriedItem;
-        itemToDeposit.Detach();
+        itemToDeposit.Release();
         carriedItem = null;
 
         return itemToDeposit;

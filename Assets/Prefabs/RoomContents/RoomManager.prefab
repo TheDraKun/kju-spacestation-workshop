@@ -452,9 +452,9 @@ MonoBehaviour:
   requiredItems: 3
   depositStation: {fileID: 1566432225275337863}
   activationConsole: {fileID: 920666547965760395}
+  itemSpawner: {fileID: 5319683758865949334}
   progressDoors:
   - {fileID: 1702649547796949711}
-  itemSpawner: {fileID: 5319683758865949334}
 --- !u!114 &5319683758865949334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1042,6 +1042,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DepositStation
       objectReference: {fileID: 0}
+    - target: {fileID: 2872607666476508325, guid: c877a0c02afcfaf48b0b8ecfb7e73ddd, type: 3}
+      propertyPath: roomManager
+      value: 
+      objectReference: {fileID: 2536735038733956489}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1295,6 +1299,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8188974831192960231, guid: ec99220b78ceac84ea2ffc7566788ff7, type: 3}
+      propertyPath: roomManager
+      value: 
+      objectReference: {fileID: 2536735038733956489}
     - target: {fileID: 8188974831192960231, guid: ec99220b78ceac84ea2ffc7566788ff7, type: 3}
       propertyPath: depositStation
       value: 

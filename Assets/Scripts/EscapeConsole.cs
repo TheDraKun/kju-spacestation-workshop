@@ -46,7 +46,6 @@ public class EscapeConsole : MonoBehaviour
         if (!other.TryGetComponent<PlayerCarry>(out _))
             return;
 
-        activationSound.Play();
         Activate();
     }
 

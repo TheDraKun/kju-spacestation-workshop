@@ -107,3 +107,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressDoor
   doorCollider: {fileID: 8972261001227293333}
+  openDistance: -1
+  openDuration: 1

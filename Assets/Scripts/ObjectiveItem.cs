@@ -11,8 +11,8 @@ public enum ObjectiveItemType
 
 public class ObjectiveItem : MonoBehaviour
 {
-    [SerializeField]
-    private ObjectiveItemType itemType;
+    [Header("Settings")]
+    [SerializeField] private ObjectiveItemType itemType;
 
     public ObjectiveItemType ItemType => itemType;
 
@@ -26,7 +26,7 @@ public class ObjectiveItem : MonoBehaviour
             itemCollider.enabled = false;
     }
 
-    public void Detach()
+    public void Release()
     {
         transform.SetParent(null);
     }

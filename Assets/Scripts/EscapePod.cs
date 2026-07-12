@@ -10,12 +10,11 @@ public class EscapePod : MonoBehaviour
     private Vector3 hiddenPosition;
     private Coroutine movementRoutine;
 
-    private bool hasPodUtilize = false;
+    private bool hasPlayerBoarded = false;
 
     private void Awake()
     {
         hiddenPosition = transform.localPosition;
-        hasPodUtilize = false;
     }
 
     public void Arrive()
@@ -23,10 +22,10 @@ public class EscapePod : MonoBehaviour
         MoveTo(raisedPosition);
     }
 
-    public void Depart()
+    public void Escape()
     {
         MoveTo(hiddenPosition);
-        GameManager.Instance.CompleteGame();
+        GameManager.Instance.ShowGameCompleteScreen();
     }
 
     private void MoveTo(Vector3 targetPosition)
@@ -60,21 +59,19 @@ public class EscapePod : MonoBehaviour
         transform.localPosition = targetPosition;
 
         movementRoutine = null;
-
-        Debug.Log($"Escape Pod moved to {targetPosition}");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasPodUtilize)
+        if (hasPlayerBoarded)
             return;
         if (other.TryGetComponent(out PlayerMovement _))
         {
             other.gameObject.SetActive(false);
 
-            hasPodUtilize = true;
+            hasPlayerBoarded = true;
 
-            Depart();
+            Escape();
 
             Debug.Log("Player Entered Escape Pod!");
         }

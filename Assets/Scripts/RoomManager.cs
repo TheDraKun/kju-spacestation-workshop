@@ -2,36 +2,35 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private int requiredItems = 3;
+
+    [Header("References")]
     [SerializeField] private DepositStation depositStation;
     [SerializeField] private ActivationConsole activationConsole;
-
-    [SerializeField] private ProgressDoor[] progressDoors;
     [SerializeField] private ObjectiveItemSpawner itemSpawner;
+    [SerializeField] private ProgressDoor[] progressDoors;
 
     private bool roomCompleted;
+
     public bool IsCompleted => roomCompleted;
     public int RequiredItems => requiredItems;
     public int CurrentItems => depositStation.CurrentItems;
+
     private void Start()
     {
         depositStation.Initialize(requiredItems);
         itemSpawner.SetSpawnCount(requiredItems);
     }
-    private void Update()
+
+    public void OnDepositCompleted()
+    {
+        activationConsole.SetAsReady();
+    }
+
+    public void OnConsoleActivated()
     {
         if (roomCompleted)
-            return;
-
-        if (!depositStation.IsComplete)
-            return;
-
-        if (depositStation.IsComplete && !activationConsole.IsReady)
-        {
-            activationConsole.SetAsReady();
-        }
-
-        if (!activationConsole.IsActivated)
             return;
 
         CompleteRoom();
@@ -46,20 +45,17 @@ public class RoomManager : MonoBehaviour
             door.Open();
         }
 
-        OnRoomCompleted();
         Debug.Log($"{gameObject.name} Completed!");
+
+        GameManager.Instance.OnRoomCompleted(this);
     }
 
     public void InitializeRoom()
     {
+        roomCompleted = false;
+
         depositStation.ResetStation();
         activationConsole.ResetConsole();
         itemSpawner.SpawnItems();
-        roomCompleted = false;
-    }
-
-    private void OnRoomCompleted()
-    {
-        GameManager.Instance.OnRoomCompleted(this);
     }
 }

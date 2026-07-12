@@ -45,34 +45,34 @@ public class UIManager : MonoBehaviour
     }
 
     #region Visibility
-    public void ShowReactor()
+    public void ShowReactorObjective()
     {
         reactorGroup.SetActive(true);
     }
 
-    public void HideReactor()
+    public void HideReactorObjective()
     {
         reactorGroup.SetActive(false);
     }
 
-    public void ShowMedbay()
+    public void ShowMedbayObjective()
     {
         medbayGroup.SetActive(true);
     }
 
-    public void HideMedbay()
+    public void HideMedbayObjective()
     {
         medbayGroup.SetActive(false);
     }
 
-    public void ShowControlRoom()
+    public void ShowControlRoomObjective()
     {
         controlRoomGroup.SetActive(true);
-        Invoke(nameof(HideMedbay), 2f);
-        Invoke(nameof(HideReactor), 2f);
+        Invoke(nameof(HideMedbayObjective), 2f);
+        Invoke(nameof(HideReactorObjective), 2f);
     }
 
-    public void HideControlRoom()
+    public void HideControlRoomObjective()
     {
         controlRoomGroup.SetActive(false);
     }
@@ -80,14 +80,13 @@ public class UIManager : MonoBehaviour
     public void ShowEscape()
     {
         escapeGroup.SetActive(true);
-        Invoke(nameof(HideControlRoom), 2f);
+        Invoke(nameof(HideControlRoomObjective), 2f);
     }
 
     public void HideEscape()
     {
         escapeGroup.SetActive(false);
     }
-
     #endregion
 
     #region Progress
@@ -111,42 +110,42 @@ public class UIManager : MonoBehaviour
 
     #region Status
 
-    public void SetReactorActive()
+    public void SetReactorObjectiveActive()
     {
         reactorStatusImage.sprite = activeSprite;
     }
 
-    public void SetReactorComplete()
+    public void SetReactorObjectiveComplete()
     {
         reactorStatusImage.sprite = completedSprite;
     }
 
-    public void SetMedbayActive()
+    public void SetMedbayObjectiveActive()
     {
         medbayStatusImage.sprite = activeSprite;
     }
 
-    public void SetMedbayComplete()
+    public void SetMedbayObjectiveComplete()
     {
         medbayStatusImage.sprite = completedSprite;
     }
 
-    public void SetControlRoomActive()
+    public void SetControlRoomObjectiveActive()
     {
         controlRoomStatusImage.sprite = activeSprite;
     }
 
-    public void SetControlRoomComplete()
+    public void SetControlRoomObjectiveComplete()
     {
         controlRoomStatusImage.sprite = completedSprite;
     }
 
-    public void SetEscapeActive()
+    public void SetEscapeObjectiveActive()
     {
         escapeStatusImage.sprite = activeSprite;
     }
 
-    public void SetEscapeComplete()
+    public void SetEscapeObjectiveComplete()
     {
         escapeStatusImage.sprite = completedSprite;
     }
