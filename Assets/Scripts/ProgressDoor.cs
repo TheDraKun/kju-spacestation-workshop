@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ProgressDoor : MonoBehaviour
@@ -28,8 +29,23 @@ public class ProgressDoor : MonoBehaviour
 
         doorCollider.enabled = false;
 
-        doorCollider.transform.localPosition = closedPosition + Vector3.right * openDistance;
+        StartCoroutine(AnimateDoor(closedPosition + Vector3.right * openDistance));
 
         Debug.Log("Door Opened!");
+    }
+    private IEnumerator AnimateDoor(Vector3 targetPosition)
+    {
+        Vector3 startPosition = doorCollider.transform.localPosition;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < openDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / openDuration);
+            doorCollider.transform.localPosition = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+
+        doorCollider.transform.localPosition = targetPosition;
     }
 }
