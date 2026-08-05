@@ -19,59 +19,32 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
-    // Read player input, then update movement every frame.
     private void Update()
     {
-        ReadInput();
-        Move();
-        Rotate();
-        UpdateAnimation();
+        // Mission 1 - Take Control
+        // 1. Read keyboard input.
+        // 2. Move the player.
+        // 3. Rotate the player toward the movement direction.
+        // 4. Update the running animation.
     }
 
     private void ReadInput()
     {
-        moveInput = Vector2.zero;
-
-        if (Keyboard.current.wKey.isPressed)
-            moveInput.y += 1;
-
-        if (Keyboard.current.sKey.isPressed)
-            moveInput.y -= 1;
-
-        if (Keyboard.current.aKey.isPressed)
-            moveInput.x -= 1;
-
-        if (Keyboard.current.dKey.isPressed)
-            moveInput.x += 1;
-
-        moveInput = moveInput.normalized;
+        // Mission 1 - Read WASD input into moveInput.
     }
 
     private void Move()
     {
-        Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-
-        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        // Mission 1 - Convert moveInput into a world-space movement direction.
     }
 
     private void Rotate()
     {
-        if (moveInput == Vector2.zero)
-            return;
-
-        Vector3 lookDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-
-        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * Time.deltaTime);
+        // Mission 1 - Rotate the player toward the current movement direction.
     }
 
     private void UpdateAnimation()
     {
-        bool isRunning = moveInput.sqrMagnitude > 0f;
-        playerAnimator.SetBool("Run", isRunning);
+        // Mission 1 - Update the Animator based on whether the player is moving.
     }
 }
