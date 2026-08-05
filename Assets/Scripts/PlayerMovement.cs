@@ -16,11 +16,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        // Get the CharacterController attached to the Player.
     }
 
     private void Update()
     {
+        // Read input first, then update the Player every frame.
         ReadInput();
         Move();
         Rotate();
@@ -29,46 +30,38 @@ public class PlayerMovement : MonoBehaviour
 
     private void ReadInput()
     {
-        moveInput = Vector2.zero;
+        // Start with no movement input.
 
-        if (Keyboard.current.wKey.isPressed)
-            moveInput.y += 1;
+        // Read W and S for forward/backward movement.
 
-        if (Keyboard.current.sKey.isPressed)
-            moveInput.y -= 1;
+        // Read A and D for left/right movement.
 
-        if (Keyboard.current.aKey.isPressed)
-            moveInput.x -= 1;
-
-        if (Keyboard.current.dKey.isPressed)
-            moveInput.x += 1;
-
-        moveInput = moveInput.normalized;
+        // Normalize the input so diagonal movement is not faster.
     }
 
     private void Move()
     {
-        Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        // Convert our 2D input into a direction in the 3D world.
+
+        // Move using the CharacterController.
+        // Remember to make movement frame-rate independent.
     }
 
     private void Rotate()
     {
-        if (moveInput == Vector2.zero)
-            return;
+        // Do nothing if the Player is standing still.
 
-        Vector3 lookDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+        // Convert the movement input into a direction to face.
 
-        transform.rotation = Quaternion.Slerp(
-            transform.rotation,
-            targetRotation,
-            rotationSpeed * Time.deltaTime);
+        // Calculate the target rotation.
+
+        // Smoothly rotate the Player toward that direction.
     }
 
     private void UpdateAnimation()
     {
-        bool isRunning = moveInput.sqrMagnitude > 0f;
-        playerAnimator.SetBool("Run", isRunning);
+        // Check whether the Player is moving.
+
+        // Update the Animator's "Run" parameter.
     }
 }
