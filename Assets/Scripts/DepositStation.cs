@@ -10,6 +10,7 @@ public class DepositStation : MonoBehaviour
     [Header("References")]
     [SerializeField] private List<Transform> depositSockets;
     [SerializeField] private Renderer[] statusRenderers;
+    [SerializeField] private RoomManager roomManager;
 
     [Header("Materials")]
     [SerializeField] private Material inactiveMaterial;
@@ -43,24 +44,36 @@ public class DepositStation : MonoBehaviour
 
     private void Deposit(ObjectiveItem item)
     {
-        // TODO: Stop if the station is already complete.
+        if (IsComplete)
+            return;
 
-        // TODO: Make sure there is a free deposit socket.
+        if (currentItems >= depositSockets.Count)
+        {
+            Debug.LogError("Not enough deposit sockets configured.");
+            return;
+        }
 
-        // TODO: Play the deposit sound.
+        depositSound.Play();
 
-        // TODO: Attach the deposited item to the next socket.
+        Transform socket = depositSockets[currentItems];
+        item.AttachTo(socket);
 
-        // TODO: Increase the deposited item count.
+        currentItems++;
 
-        // TODO: When enough items have been deposited, complete the station.
+        Debug.Log($"Deposit Progress : {currentItems}/{requiredItems}");
+
+        if (IsComplete)
+        {
+            OnDepositCompleted();
+        }
     }
 
     private void OnDepositCompleted()
     {
-        // TODO: Change the station to its active visual state.
+        SetStatus(true);
+        roomManager.OnDepositCompleted();
 
-        // TODO: Tell the RoomManager that this deposit station is complete.
+        Debug.Log("Deposit Station Complete!");
     }
 
     private void SetStatus(bool active)
@@ -75,14 +88,18 @@ public class DepositStation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // TODO: Ignore interaction if this station is already complete.
+        if (IsComplete)
+            return;
 
-        // TODO: Check whether the object entering is the Player with PlayerCarry.
+        if (!other.TryGetComponent(out PlayerCarry playerCarry))
+            return;
 
-        // TODO: Make sure the Player is carrying an item.
+        if (!playerCarry.HasItem)
+            return;
 
-        // TODO: Make sure the carried item is the type this station requires.
+        if (playerCarry.CarriedItem.ItemType != requiredItemType)
+            return;
 
-        // TODO: Remove the item from the Player and deposit it.
+        Deposit(playerCarry.DepositItem());
     }
 }
