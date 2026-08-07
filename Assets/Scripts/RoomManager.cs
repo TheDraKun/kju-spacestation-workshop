@@ -11,7 +11,7 @@ public class RoomManager : MonoBehaviour
 
     public bool IsCompleted => roomCompleted;
 
-    private void Start()
+    public void InitializeRoom()
     {
         itemSpawner.SpawnItems();
     }
@@ -38,6 +38,7 @@ public class RoomManager : MonoBehaviour
             door.Open();
         }
 
+        GameManager.Instance.OnRoomCompleted(this);
         Debug.Log($"{gameObject.name} Completed!");
     }
 }
