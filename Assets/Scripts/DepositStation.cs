@@ -10,7 +10,6 @@ public class DepositStation : MonoBehaviour
     [Header("References")]
     [SerializeField] private List<Transform> depositSockets;
     [SerializeField] private Renderer[] statusRenderers;
-    [SerializeField] private RoomManager roomManager;
 
     [Header("Materials")]
     [SerializeField] private Material inactiveMaterial;
