@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1784934410856220953}
   - component: {fileID: 3290958462590269331}
   - component: {fileID: 6838241249554071335}
+  - component: {fileID: 9119842408038483789}
   - component: {fileID: 255687451666267223}
   m_Layer: 0
   m_Name: Player
@@ -77,6 +78,20 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   playerAnimator: {fileID: 6629981589267055280}
+--- !u!114 &9119842408038483789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60940573971339027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5833f218eb00d48aa3f48f5021ba6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCarry
+  carryPoint: {fileID: 6985190300648249594}
+  pickupSound: {fileID: 255687451666267223}
 --- !u!82 &255687451666267223
 AudioSource:
   m_ObjectHideFlags: 0
