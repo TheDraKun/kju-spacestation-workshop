@@ -5,10 +5,16 @@ public class RoomManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private ActivationConsole activationConsole;
     [SerializeField] private ProgressDoor[] progressDoors;
+    [SerializeField] private ObjectiveItemSpawner itemSpawner;
 
     private bool roomCompleted;
 
     public bool IsCompleted => roomCompleted;
+
+    private void Start()
+    {
+        itemSpawner.SpawnItems();
+    }
 
     public void OnDepositCompleted()
     {

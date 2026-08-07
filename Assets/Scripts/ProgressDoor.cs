@@ -6,7 +6,7 @@ public class ProgressDoor : MonoBehaviour
     [SerializeField] private Collider doorCollider;
 
     [Header("Animation")]
-    [SerializeField] private float openDistance = 3f;
+    [SerializeField] private float openDistance = 0.75f;
     [SerializeField] private float openDuration = 1f;
 
     private Vector3 closedPosition;
