@@ -15,26 +15,27 @@ public class PlayerCarry : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // The Player can only carry one objective item at a time.
+        // The player can only carry one item at a time.
+        if (HasItem)
+            return;
 
-        // Check whether the object we touched is an ObjectiveItem.
-
-        // Play the pickup sound.
-
-        // Attach the item to the carry point and remember it.
+        if (other.TryGetComponent(out ObjectiveItem item))
+        {
+            pickupSound.Play();
+            item.AttachTo(carryPoint);
+            carriedItem = item;
+        }
     }
 
     public ObjectiveItem DepositItem()
     {
-        // If we are not carrying anything, there is nothing to deposit.
+        if (!HasItem)
+            return null;
 
-        // Store the carried item before clearing our reference.
+        ObjectiveItem itemToDeposit = carriedItem;
+        itemToDeposit.Release();
+        carriedItem = null;
 
-        // Release the item from the Player.
-
-        // Clear the carried item reference.
-
-        // Return the deposited item to the system that requested it.
-        return null;
+        return itemToDeposit;
     }
 }
