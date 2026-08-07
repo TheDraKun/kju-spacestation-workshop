@@ -18,15 +18,16 @@ public class ObjectiveItem : MonoBehaviour
 
     public void AttachTo(Transform parent)
     {
-        // Parent this objective item to the Player's carry point.
+        transform.SetParent(parent);
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
 
-        // Reset its local position and rotation so it sits correctly.
-
-        // Disable its Collider while it is being carried.
+        if (TryGetComponent(out Collider itemCollider))
+            itemCollider.enabled = false;
     }
 
     public void Release()
     {
-        // Remove this item from its current parent.
+        transform.SetParent(null);
     }
 }
