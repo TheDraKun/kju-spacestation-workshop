@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RoomManager[] initialRooms;
     [SerializeField] private RoomManager finalRoom;
 
+    [SerializeField] private EscapeConsole escapeConsole;
+
     private bool controlRoomUnlocked;
 
     private void Awake()
@@ -42,6 +44,12 @@ public class GameManager : MonoBehaviour
 
     internal void OnRoomCompleted(RoomManager roomManager)
     {
+        if (roomManager == finalRoom)
+        {
+            escapeConsole.SetReady();
+            return;
+        }
+
         if (controlRoomUnlocked)
             return;
 
@@ -50,5 +58,11 @@ public class GameManager : MonoBehaviour
 
         controlRoomUnlocked = true;
         finalRoom.InitializeRoom();
+    }
+
+    private void UnlockEscapeConsole()
+    {
+        escapeConsole.SetReady();
+
     }
 }

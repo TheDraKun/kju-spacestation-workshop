@@ -24,7 +24,8 @@ public class EscapePod : MonoBehaviour
     public void Escape()
     {
         MoveTo(hiddenPosition);
-        GameManager.Instance.ShowGameCompleteScreen();
+
+        Debug.Log("Game Complete!");
     }
 
     private void MoveTo(Vector3 targetPosition)
