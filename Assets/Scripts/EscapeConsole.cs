@@ -50,6 +50,8 @@ public class EscapeConsole : MonoBehaviour
         isActivated = true;
         SetActivatedStatus();
         escapePod.Arrive();
+
+        GameManager.Instance.OnEscapeActivated();
     }
 
     private void SetInactiveStatus()
