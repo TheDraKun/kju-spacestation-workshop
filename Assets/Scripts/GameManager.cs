@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if (roomManager == finalRoom)
         {
-            escapeConsole.SetReady();
+            UnlockEscapeConsole();
             return;
         }
 
