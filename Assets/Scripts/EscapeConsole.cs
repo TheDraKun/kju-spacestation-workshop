@@ -20,28 +20,36 @@ public class EscapeConsole : MonoBehaviour
 
     private void Start()
     {
-        // TODO: Start the console in its inactive visual state.
+        SetInactiveStatus();
     }
 
     public void SetReady()
     {
-        // TODO: Mark the console as ready and update its visuals.
+        if (isReady)
+            return;
+
+        isReady = true;
+        SetReadyStatus();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // TODO: Only activate when the console is ready.
-        // TODO: Prevent the console from activating more than once.
-        // TODO: Check that the Player entered the trigger.
-        // TODO: Activate the escape sequence.
+        if (!isReady || isActivated)
+            return;
+
+        if (!other.TryGetComponent<PlayerCarry>(out _))
+            return;
+
+        Activate();
     }
 
     private void Activate()
     {
-        // TODO: Play the activation sound.
-        // TODO: Mark the console as activated.
-        // TODO: Update the console visuals.
-        // TODO: Make the Escape Pod arrive.
+        activationSound.Play();
+
+        isActivated = true;
+        SetActivatedStatus();
+        escapePod.Arrive();
     }
 
     private void SetInactiveStatus()
