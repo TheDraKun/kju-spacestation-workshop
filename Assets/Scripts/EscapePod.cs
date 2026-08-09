@@ -13,35 +13,61 @@ public class EscapePod : MonoBehaviour
 
     private void Awake()
     {
-        // TODO: Remember the Escape Pod's starting hidden position.
+        hiddenPosition = transform.localPosition;
     }
 
     public void Arrive()
     {
-        // TODO: Move the Escape Pod to its raised position.
+        MoveTo(raisedPosition);
     }
 
     public void Escape()
     {
-        // TODO: Move the Escape Pod back to its hidden position.
+        MoveTo(hiddenPosition);
+        GameManager.Instance.ShowGameCompleteScreen();
     }
 
     private void MoveTo(Vector3 targetPosition)
     {
-        // TODO: Stop the current movement routine if one is already running.
-        // TODO: Start moving toward targetPosition.
+        if (movementRoutine != null)
+            StopCoroutine(movementRoutine);
+
+        movementRoutine = StartCoroutine(MoveRoutine(targetPosition));
     }
 
     private IEnumerator MoveRoutine(Vector3 targetPosition)
     {
-        // TODO: Smoothly move from the current position to targetPosition.
-        yield break;
+        Vector3 startPosition = transform.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < moveDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            float t = Mathf.Clamp01(elapsed / moveDuration);
+
+            transform.localPosition = Vector3.Lerp(
+                startPosition,
+                targetPosition,
+                t);
+
+            yield return null;
+        }
+
+        transform.localPosition = targetPosition;
+        movementRoutine = null;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // TODO: Prevent boarding more than once.
-        // TODO: Check that the Player entered the pod.
-        // TODO: Hide the Player and start the escape.
+        if (hasPlayerBoarded)
+            return;
+
+        if (!other.TryGetComponent<PlayerMovement>(out _))
+            return;
+
+        other.gameObject.SetActive(false);
+        hasPlayerBoarded = true;
+        Escape();
     }
 }
